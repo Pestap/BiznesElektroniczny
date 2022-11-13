@@ -25,7 +25,7 @@ driver.get(base_url +f"/{categories[1]}")
 driver.implicitly_wait(1)
 driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
 #scroll
-time.sleep(3)
+time.sleep(2)
 
 total_height = driver.execute_script("return document.body.scrollHeight")
 
@@ -33,12 +33,26 @@ for i in range(1, total_height, 200):
     driver.execute_script(f"window.scrollTo(0, {i})")
     time.sleep(0.1)
 
+products = []
 soup = BeautifulSoup(driver.page_source, "html.parser")
-divs = soup.find_all(By.CLASS_NAME, "jss315")
-for div in divs:
-    print(div.prettify())
+#get all divs with product data
+product_divs = soup.find_all(class_="jss315")
+for product_div in product_divs:
+    parsed_product = BeautifulSoup(str(product_div), "html.parser")
+    img_src = parsed_product.find('img').get('src') # get src attribute for image
+    product_name = parsed_product.find(class_ ="MuiButtonBase-root jss333").text
+    product_price = parsed_product.find(class_ = "jss335").findChildren()
+    price_zl = int(product_price[0].text)
+    price_gr = int(product_price[1].text)
+    price = price_zl + price_gr/100
 
-print(len(divs))
+
+    products.append((product_name,price, img_src))
+
+
+print(len(products))
+for product in products:
+    print(product)
 
 
 
