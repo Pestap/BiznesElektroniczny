@@ -16,7 +16,7 @@ import json
 from product import Product
 
 def create_json_file(products, file_name):
-    file_url = "../"+file_name
+    file_url = "../Results/"+file_name
     with open(file_url, "w", encoding='utf8') as json_file:
         json.dump([x.__dict__ for x in products], json_file, ensure_ascii=False)
 
@@ -41,7 +41,7 @@ def get_categories_of_product(product):
 base_url = "https://www.carrefour.pl"
 
 #kategorie
-categories = ["mleko-nabial-jaja", "napoje"]
+categories = ["owoce-warzywa-ziola", "napoje"]
 
 products = []
 
@@ -70,7 +70,7 @@ for page in range(0, 1):
 
     for i in range(1, total_height, 200):
         driver.execute_script(f"window.scrollTo(0, {i})")
-        time.sleep(0.1)
+        time.sleep(0.3)
 
     soup = BeautifulSoup(driver.page_source, "html.parser")
     #get all divs with product data
@@ -86,10 +86,10 @@ for page in range(0, 1):
         product_href = url + parsed_product.find(class_="MuiButtonBase-root jss333").get('href')
         price_zl = int(product_price[0].text)
         price_gr = int(product_price[1].text)
-        price = price_zl + round(price_gr/100, 2)
+        price = price_zl + price_gr/100
 
 
-        products.append(Product(product_name, price, img_src, [], product_href))
+        products.append(Product(product_name, round(price,2), img_src, [], product_href))
 
     driver.close()
     print(len(products))
@@ -102,7 +102,6 @@ for idx, product in enumerate(products):
     stop = time.time()
     product.save_img()
     print(str(idx) + " - " + str(stop-start) + "-" + product.toJSON())
-    time.sleep(5)
 
 create_json_file(products, "products.json")
 
