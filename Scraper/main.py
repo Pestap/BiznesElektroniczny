@@ -6,9 +6,14 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from fake_useragent import UserAgent #fake user agent to avoid blocking by site
 import os
+import json
 
 from product import Product
 
+def create_json_file(products, file_name):
+    file_url = "../"+file_name
+    with open(file_url, "w", encoding='utf8') as json_file:
+        json.dump([x.__dict__ for x in products], json_file, ensure_ascii=False)
 
 def get_categories_of_product(product):
     ua = UserAgent()
@@ -38,6 +43,8 @@ products = []
 
 #29 pages indexed: 0 - 28
 for page in range(25,28):
+    if len(products) == 5:
+        break
     page_url = base_url +f"/{categories[1]}" + f"?page={page}"
     #creating random user agent to user
     ua = UserAgent()
@@ -82,6 +89,9 @@ for page in range(25,28):
 
         products.append(Product(product_name, price, img_src, [], product_href))
 
+        if len(products) == 5:
+            break
+
     print(len(products))
     for product in products:
         start = time.time()
@@ -90,7 +100,7 @@ for page in range(25,28):
         product.save_img()
         print(str(stop-start) + "-" + product.toJSON())
 
-
+create_json_file(products, "products.json")
 
 
 
