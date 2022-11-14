@@ -3,10 +3,15 @@ import time
 from bs4 import BeautifulSoup #przetwarzanie html
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chromium.service import ChromiumService
 from selenium.webdriver.common.by import By
 from fake_useragent import UserAgent #fake user agent to avoid blocking by site
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.utils import ChromeType
 import os
 import json
+
+
 
 from product import Product
 
@@ -19,18 +24,17 @@ def get_categories_of_product(product):
     ua = UserAgent()
     user = ua.random
     options = Options()
-    chrome_driver = os.getcwd() + "D:\webdriver\chromedriver.exe"  # chrome webdriver location
     options.headless = True
     options.add_argument(f'user-agent={user}')
-    driver = webdriver.Chrome(options=options, executable_path=chrome_driver)
+    driver = webdriver.Chrome(options=options, service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.get(product.href)
+    driver.refresh()
     driver.implicitly_wait(2)
 
     page = BeautifulSoup(driver.page_source, "html.parser")
 
     breadcrumbs = page.find_all(class_="MuiBreadcrumbs-li")
     breadcrumbs = breadcrumbs[1:]
-
     product.categories = [x.text for x in breadcrumbs]#from broader to more specific
     driver.close()
 
@@ -42,23 +46,23 @@ categories = ["mleko-nabial-jaja", "napoje"]
 products = []
 
 #29 pages indexed: 0 - 28
-for page in range(0, 28):
+for page in range(0, 1):
+
     page_url = base_url +f"/{categories[1]}" + f"?page={page}"
     #creating random user agent to user
 
     ua = UserAgent()
     user = ua.random
-
     options = Options()
-    chrome_driver = os.getcwd() + "D:\webdriver\chromedriver.exe" #chrome webdriver location
-    options.headless = True
+    #options.headless = False
     options.add_argument(f'user-agent={user}')
-    driver = webdriver.Chrome(options=options, executable_path=chrome_driver)
-    driver.get(page_url)
 
-    driver.implicitly_wait(10)
-    if page == 1:
-        driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
+    driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=options)
+    driver.get(page_url)
+    driver.refresh()
+    driver.implicitly_wait(5)
+
+    driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
     #scroll
     time.sleep(2)
 
@@ -87,14 +91,18 @@ for page in range(0, 28):
 
         products.append(Product(product_name, price, img_src, [], product_href))
 
-
+    driver.close()
     print(len(products))
-    for idx, product in enumerate(products):
-        start = time.time()
-        get_categories_of_product(product)
-        stop = time.time()
-        product.save_img()
-        print(str(idx) + " - " + str(stop-start) + "-" + product.toJSON())
+
+time.sleep(3)
+
+for idx, product in enumerate(products):
+    start = time.time()
+    get_categories_of_product(product)
+    stop = time.time()
+    product.save_img()
+    print(str(idx) + " - " + str(stop-start) + "-" + product.toJSON())
+    time.sleep(5)
 
 create_json_file(products, "products.json")
 
