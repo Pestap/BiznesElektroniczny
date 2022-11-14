@@ -1,4 +1,6 @@
 import json
+import urllib.request
+
 import requests
 
 class Product:
@@ -13,4 +15,6 @@ class Product:
         return json.dumps(self.__dict__, ensure_ascii=False)
 
     def save_img(self):
-        image = requests.get(self.href)
+        name = self.img_src.split('/')[-1]
+        urllib.request.urlretrieve(self.img_src, "Images/"+name)
+        self.img_src = "Images/"+name
