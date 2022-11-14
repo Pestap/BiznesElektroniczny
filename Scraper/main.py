@@ -4,6 +4,7 @@ import requests #biblioteka do obsługi żądań http
 from bs4 import BeautifulSoup #przetwarzanie html
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from fake_useragent import UserAgent
 import os
 
 #bazowy adres sklepu
@@ -12,32 +13,41 @@ from selenium.webdriver.common.by import By
 from product import Product
 
 
-def get_categories_of_product(product, webdriver):
-    webdriver.get(product.href)
-    webdriver.implicitly_wait(1)
+def get_categories_of_product(product):
+    ua = UserAgent()
+    user = ua.random
+    options = Options()
+    chrome_driver = os.getcwd() + "D:\webdriver\chromedriver.exe"  # chrome webdriver location
+    options.headless = True
+    options.add_argument(f'user-agent={user}')
+    driver = webdriver.Chrome(options=options, executable_path=chrome_driver)
+    driver.get(product.href)
+    driver.implicitly_wait(2)
 
-    page = BeautifulSoup(webdriver.page_source, "html.parser")
+    page = BeautifulSoup(driver.page_source, "html.parser")
 
     breadcrumbs = page.find_all(class_="MuiBreadcrumbs-li")
     breadcrumbs = breadcrumbs[1:]
 
     product.categories = [x.text for x in breadcrumbs]#from broader to more specific
-
+    driver.close()
 
 base_url = "https://www.carrefour.pl"
 
 #kategorie
 categories = ["mleko-nabial-jaja", "napoje"]
 
-
+ua = UserAgent()
+user = ua.random
 options = Options()
 chrome_driver = os.getcwd() + "D:\webdriver\chromedriver.exe" #chrome webdriver location
 #options.headless = True
+options.add_argument(f'user-agent={user}')
 driver = webdriver.Chrome(options=options, executable_path=chrome_driver)
 
 
 driver.get(base_url +f"/{categories[1]}")
-driver.implicitly_wait(1)
+driver.implicitly_wait(10)
 driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
 #scroll
 time.sleep(2)
@@ -70,11 +80,18 @@ for product_div in product_divs:
 
 print(len(products))
 
-for product in products[3:4]:
-    get_categories_of_product(product, driver)
-    product.save_img()
+for product in products:
     print(product.toJSON())
-    time.sleep(1)
+
+for product in products:
+    start = time.time()
+    get_categories_of_product(product)
+    stop = time.time()
+
+
+    product.save_img()
+    print(str(stop-start) + "-" + product.toJSON())
+    #time.sleep(1)
 
 
 
