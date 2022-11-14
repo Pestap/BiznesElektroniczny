@@ -42,11 +42,10 @@ categories = ["mleko-nabial-jaja", "napoje"]
 products = []
 
 #29 pages indexed: 0 - 28
-for page in range(25,28):
-    if len(products) == 5:
-        break
+for page in range(0, 28):
     page_url = base_url +f"/{categories[1]}" + f"?page={page}"
     #creating random user agent to user
+
     ua = UserAgent()
     user = ua.random
 
@@ -55,11 +54,10 @@ for page in range(25,28):
     options.headless = True
     options.add_argument(f'user-agent={user}')
     driver = webdriver.Chrome(options=options, executable_path=chrome_driver)
-
-
     driver.get(page_url)
+
     driver.implicitly_wait(10)
-    if page == 0:
+    if page == 1:
         driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
     #scroll
     time.sleep(2)
@@ -89,16 +87,14 @@ for page in range(25,28):
 
         products.append(Product(product_name, price, img_src, [], product_href))
 
-        if len(products) == 5:
-            break
 
     print(len(products))
-    for product in products:
+    for idx, product in enumerate(products):
         start = time.time()
         get_categories_of_product(product)
         stop = time.time()
         product.save_img()
-        print(str(stop-start) + "-" + product.toJSON())
+        print(str(idx) + " - " + str(stop-start) + "-" + product.toJSON())
 
 create_json_file(products, "products.json")
 
