@@ -1,3 +1,4 @@
+import datetime
 import time
 
 from bs4 import BeautifulSoup #przetwarzanie html
@@ -8,7 +9,6 @@ from selenium.webdriver.common.by import By
 from fake_useragent import UserAgent #fake user agent to avoid blocking by site
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.utils import ChromeType
-import os
 import json
 
 
@@ -21,88 +21,101 @@ def create_json_file(products, file_name):
         json.dump([x.__dict__ for x in products], json_file, ensure_ascii=False)
 
 def get_categories_of_product(product):
+    #random user agent
     ua = UserAgent()
     user = ua.random
     options = Options()
+    #headless mode
     options.headless = True
     options.add_argument(f'user-agent={user}')
     driver = webdriver.Chrome(options=options, service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.get(product.href)
-    driver.refresh()
-    driver.implicitly_wait(2)
+    driver.refresh() # in order to bypass error 15
+    driver.implicitly_wait(1) # wait for load
+    driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click() # accept data processing
 
-    page = BeautifulSoup(driver.page_source, "html.parser")
+    page = BeautifulSoup(driver.page_source, "html.parser") #get page content
 
-    breadcrumbs = page.find_all(class_="MuiBreadcrumbs-li")
-    breadcrumbs = breadcrumbs[1:]
-    product.categories = [x.text for x in breadcrumbs]#from broader to more specific
+    # Get categories of element via breadcrumb menu
+
+    breadcrumbs = page.find_all(class_="MuiBreadcrumbs-li") #find breadcrumb menu element
+    breadcrumbs = breadcrumbs[1:] #except first element (always "Strona główna")
+    product.categories = [x.text for x in breadcrumbs] #create list
     driver.close()
 
 base_url = "https://www.carrefour.pl"
 
-#kategorie
-categories = ["owoce-warzywa-ziola", "napoje"]
+#category data
+categories = [{"name": "owoce-warzywa-ziola",
+               "div": "jss305",
+               "el_name": "MuiButtonBase-root jss323",
+               "price": "jss325",
+               "page_number": 7},
+              {"name": "napoje",
+               "div": "jss315",
+               "el_name": "MuiButtonBase-root jss333",
+               "price": "jss335",
+               "page_number": 29}]
 
 products = []
 
-#29 pages indexed: 0 - 28
-for page in range(0, 1):
+for el in categories:
+    for page in range(0, el['page_number']):
 
-    page_url = base_url +f"/{categories[1]}" + f"?page={page}"
-    #creating random user agent to user
+        #get page url
+        page_url = base_url + f"/{el['name']}" + f"?page={page}"
 
-    ua = UserAgent()
-    user = ua.random
-    options = Options()
-    #options.headless = False
-    options.add_argument(f'user-agent={user}')
+        #creating random user agent to user
+        ua = UserAgent()
+        user = ua.random
+        options = Options()
+        options.headless = True
+        options.add_argument(f'user-agent={user}')
 
-    driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=options)
-    driver.get(page_url)
-    driver.refresh()
-    driver.implicitly_wait(5)
+        driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=options)
+        driver.get(page_url)
+        driver.refresh() # bypass Error 15
+        driver.implicitly_wait(1)
 
-    driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
-    #scroll
-    time.sleep(2)
-
-    total_height = driver.execute_script("return document.body.scrollHeight")
-
-    for i in range(1, total_height, 200):
-        driver.execute_script(f"window.scrollTo(0, {i})")
-        time.sleep(0.3)
-
-    soup = BeautifulSoup(driver.page_source, "html.parser")
-    #get all divs with product data
-    product_divs = soup.find_all(class_="jss315")
-
-    url = base_url + "/" +categories[1]
-    for product_div in product_divs:
-        parsed_product = BeautifulSoup(str(product_div), "html.parser")
-        img = parsed_product.find('img') # get product image
-        img_src = img.get('src')
-        product_name = parsed_product.find(class_ ="MuiButtonBase-root jss333").text
-        product_price = parsed_product.find(class_ = "jss335").findChildren()
-        product_href = url + parsed_product.find(class_="MuiButtonBase-root jss333").get('href')
-        price_zl = int(product_price[0].text)
-        price_gr = int(product_price[1].text)
-        price = price_zl + price_gr/100
+        driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click() # accept popup
 
 
-        products.append(Product(product_name, round(price,2), img_src, [], product_href))
+        #Scroll whole page to load images
+        total_height = driver.execute_script("return document.body.scrollHeight")
 
-    driver.close()
-    print(len(products))
+        for i in range(1, total_height, 200):
+            driver.execute_script(f"window.scrollTo(0, {i})")
+            time.sleep(0.1)
 
-time.sleep(3)
+        soup = BeautifulSoup(driver.page_source, "html.parser")
 
-for idx, product in enumerate(products):
-    start = time.time()
-    get_categories_of_product(product)
-    stop = time.time()
-    product.save_img()
-    print(str(idx) + " - " + str(stop-start) + "-" + product.toJSON())
+        #get all divs with product data
+        product_divs = soup.find_all(class_=f"{el['div']}")
 
+        #url = base_url + "/" + f"{el['name']}" # get category base url
+        for product_div in product_divs:
+            parsed_product = BeautifulSoup(str(product_div), "html.parser")
+            img = parsed_product.find('img') # get product image
+            img_src = img.get('src') # get src attribute of image
+            product_name = parsed_product.find(class_ =el['el_name']).text # get name
+            product_price = parsed_product.find(class_ = el['price']).findChildren() # get price from 2 components
+            product_href = base_url + parsed_product.find(class_=el['el_name']).get('href') # get product URL
+            price_zl = int(product_price[0].text) # extract 1st price element
+            price_gr = int(product_price[1].text) # extract 2nd price element
+            price = round(price_zl + price_gr/100,2) #
+
+            #Append product to list
+            new_product = Product(product_name, price, img_src, [], product_href)
+            get_categories_of_product(new_product)
+            new_product.save_img()
+            print(new_product.toJSON())
+            products.append(new_product)
+
+        driver.close()
+        #create backup json
+        create_json_file(products, "Backups/products"+str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))+".json")
+
+# create JSON file
 create_json_file(products, "products.json")
 
 

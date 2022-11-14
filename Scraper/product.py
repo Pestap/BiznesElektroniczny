@@ -23,7 +23,7 @@ class Product:
         return json.dumps(self.__dict__, ensure_ascii=False)
 
     def save_img(self):
-
+        #get photo name from
         name = self.img_src.split('/')[-1]
         ua = UserAgent()
 
@@ -37,10 +37,12 @@ class Product:
         driver.refresh()
         driver.implicitly_wait(1)
 
-
+        #save screenshot of element (forbidden 403 if GET request with urrlib)
         with open("../Results/Images/" + name +".png", "wb") as file:
             element = driver.find_element(By.TAG_NAME, "img")
             file.write(element.screenshot_as_png)
 
-        self.img_src = "Images/"+name
+        #change img src (relative to json file)
+        self.img_src = name
+
         driver.close()
