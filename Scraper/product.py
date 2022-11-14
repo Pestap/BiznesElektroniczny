@@ -16,5 +16,5 @@ class Product:
 
     def save_img(self):
         name = self.img_src.split('/')[-1]
-        urllib.request.urlretrieve(self.img_src, "Images/"+name)
-        self.img_src = "Images/"+name
+        urllib.request.urlretrieve(self.img_src, "../Images/"+name)
+        self.img_src = "../Images/"+name
