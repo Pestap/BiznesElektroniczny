@@ -37,10 +37,15 @@ class Product:
         driver.refresh()
         driver.implicitly_wait(1)
 
+
         #save screenshot of element (forbidden 403 if GET request with urrlib)
-        with open("../Results/Images/" + name +".png", "wb") as file:
+        try:
             element = driver.find_element(By.TAG_NAME, "img")
-            file.write(element.screenshot_as_png)
+            with open("../Results/Images/" + name +".png", "wb") as file:
+
+                file.write(element.screenshot_as_png)
+        except:
+            print("ERROR SAVING IMAGE: " +str(self.toJSON()))
 
         #change img src (relative to json file)
         self.img_src = name

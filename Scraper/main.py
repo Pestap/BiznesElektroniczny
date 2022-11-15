@@ -31,8 +31,15 @@ def get_categories_of_product(product):
     driver = webdriver.Chrome(options=options, service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.get(product.href)
     driver.refresh() # in order to bypass error 15
-    driver.implicitly_wait(1) # wait for load
-    driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click() # accept data processing
+    driver.implicitly_wait(3) # wait for load
+
+    try:
+        driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
+    except:
+        print( "ERROR IN CATEGORIES: " + product.toJSON())
+        with open("../Results/" +str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))+"_error_in_cat.png", "wb") as file:
+            page = driver.find_element(By.TAG_NAME, "body")
+            file.write(page.screenshot_as_png)
 
     page = BeautifulSoup(driver.page_source, "html.parser") #get page content
 
@@ -51,11 +58,11 @@ categories = [{"name": "owoce-warzywa-ziola",
                "el_name": "MuiButtonBase-root jss323",
                "price": "jss325",
                "page_number": 7},
-              {"name": "napoje",
-               "div": "jss315",
-               "el_name": "MuiButtonBase-root jss333",
-               "price": "jss335",
-               "page_number": 29}]
+              {"name": "wedliny-kielbasy",
+               "div": "jss305",
+               "el_name": "MuiButtonBase-root jss323",
+               "price": "jss325",
+               "page_number": 5}]
 
 products = []
 
@@ -77,7 +84,13 @@ for el in categories:
         driver.refresh() # bypass Error 15
         driver.implicitly_wait(1)
 
-        driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click() # accept popup
+        try:
+            driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
+        except:
+            print("ERROR " + str(page))
+            with open("../Results/" + str(page) + ".png" , "wb") as file:
+                page = driver.find_element(By.TAG_NAME, "body")
+                file.write(page.screenshot_as_png)
 
 
         #Scroll whole page to load images
@@ -94,6 +107,7 @@ for el in categories:
 
         #url = base_url + "/" + f"{el['name']}" # get category base url
         for product_div in product_divs:
+            start = time.time()
             parsed_product = BeautifulSoup(str(product_div), "html.parser")
             img = parsed_product.find('img') # get product image
             img_src = img.get('src') # get src attribute of image
@@ -108,7 +122,8 @@ for el in categories:
             new_product = Product(product_name, price, img_src, [], product_href)
             get_categories_of_product(new_product)
             new_product.save_img()
-            print(new_product.toJSON())
+            stop = time.time()
+            print(f"{round(stop-start,2)}s - {new_product.toJSON()}")
             products.append(new_product)
 
         driver.close()
