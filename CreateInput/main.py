@@ -1,32 +1,40 @@
 import json
-
+import csv
+from category import Category
 
 def create_categories_csv(filename):
-    with open(f"../Results/{filename}", encoding='utf-8') as file:
-        result = json.load(file)
-        # result - dictrionary
+    file = open(f"../Results/{filename}", encoding='utf-8')
+    result = json.load(file)
+    # result - dictrionary
 
-        categories = []
-        for el in result:
-            categories.append(el['categories'])
+    categories = []
+    for el in result:
+        categories.append(el['categories'])
 
-        #get unique categories
-        categories_unique = []
-        for el in categories:
-            if el not in categories_unique:
-                categories_unique.append(el)
+    #get unique categories
+    categories_unique = []
+    for el in categories:
+        if el not in categories_unique:
+            categories_unique.append(el)
+    # sort by length
+    categories_unique.sort(key=len)
+
+    for el in categories_unique:
+        print(el)
+    main_category = Category("Strona główna", [], None)
+
+    for cat in categories_unique:
+        main_category.add_subcat(cat)
 
 
+    f = open("../Results/categories.csv", 'w',encoding='utf-8', newline="")
+    writer = csv.writer(f, delimiter=';')
 
-        categories_tuples = set()
+    list_to_write = []
+    main_category.create_list_to_write(list_to_write)
 
-        for el in categories:
-            for idx, cat in enumerate(el[1:]):
-                # format - categry - upper car
-                categories_tuples.add((cat, el[idx]))
-
-        categories_tuples.add(("Owoce, warzywa, zioła", "Strona główna"))
-        categories_tuples.add(("Wędliny, kiełbasy", "Strona główna"))
-
+    for cat in list_to_write:
+        writer.writerow([cat[0], cat[1]])
+        print("t")
 
 create_categories_csv('products.json')
