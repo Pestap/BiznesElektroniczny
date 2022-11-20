@@ -35,20 +35,25 @@ def get_categories_of_product(product):
 
     try:
         driver.find_element(By.CSS_SELECTOR, "#onetrust-accept-btn-handler").click()
+        page = BeautifulSoup(driver.page_source, "html.parser")  # get page content
+
+        # Get categories of element via breadcrumb menu
+
+        breadcrumbs = page.find_all(class_="MuiBreadcrumbs-li")  # find breadcrumb menu element
+        breadcrumbs = breadcrumbs[1:]  # except first element (always "Strona główna")
+        product.categories = [x.text for x in breadcrumbs]  # create list
+
+        description = page.find_all(class_="MuiAccordionDetails-root")
+        description = description[0]
+        product.description = description.text
+        driver.close()
     except:
         print( "ERROR IN CATEGORIES: " + product.toJSON())
         with open("../Results/" +str(datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))+"_error_in_cat.png", "wb") as file:
             page = driver.find_element(By.TAG_NAME, "body")
             file.write(page.screenshot_as_png)
 
-    page = BeautifulSoup(driver.page_source, "html.parser") #get page content
 
-    # Get categories of element via breadcrumb menu
-
-    breadcrumbs = page.find_all(class_="MuiBreadcrumbs-li") #find breadcrumb menu element
-    breadcrumbs = breadcrumbs[1:] #except first element (always "Strona główna")
-    product.categories = [x.text for x in breadcrumbs] #create list
-    driver.close()
 
 base_url = "https://www.carrefour.pl"
 

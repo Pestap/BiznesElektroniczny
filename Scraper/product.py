@@ -12,12 +12,13 @@ from fake_useragent import UserAgent
 
 
 class Product:
-    def __init__(self, name, price, img_src, categories, href):
+    def __init__(self, name, price, img_src, categories, href, description =""):
         self.name = name
         self.price = price
         self.img_src = img_src
         self.categories = categories
         self.href = href
+        self.description = description
 
     def toJSON(self):
         return json.dumps(self.__dict__, ensure_ascii=False)
