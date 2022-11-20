@@ -1,5 +1,7 @@
 import json
 import csv
+import os
+
 from category import Category
 
 def create_categories_csv(filename):
@@ -45,6 +47,30 @@ def create_products_csv(filename):
         row = [product['name'], product['price'], product['categories'][-1], 30, product['img_src'], product['description']]
         writer.writerow(row)
 
+# change names of images to pngs (ONLY RUN ONCE AFTER SCRAPING)
+def fix_json(filename):
+    file = open(f"../Results/{filename}", encoding='utf-8')
+    result = json.load(file)
 
+
+    for el in result:
+        name_array = el['img_src'].split('.')
+        new_name = "http://192.168.0.102/img/p/" + name_array[0] + '.png'
+        el['img_src'] = new_name
+
+    file_url = "../Results/" + filename
+    with open(file_url, "w", encoding='utf8') as json_file:
+        json.dump(result, json_file, ensure_ascii=False)
+
+def rename_images(url):
+    list = os.listdir(url)
+    for file in list:
+        file_name_array = file.split('.')
+        new_file_name = file_name_array[0] + '.' + file_name_array[-1]
+        os.rename(url+'/'+file,url+'/'+ new_file_name)
+
+
+#fix_json('products.json')
 create_categories_csv('products.json')
 create_products_csv('products.json')
+rename_images("../Results/Images")
