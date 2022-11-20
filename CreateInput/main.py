@@ -68,6 +68,8 @@ def rename_images(url):
         file_name_array = file.split('.')
         new_file_name = file_name_array[0] + '.' + file_name_array[-1]
         os.rename(url+'/'+file,url+'/'+ new_file_name)
+    list = os.listdir(url)
+    print(list)
 
 
 #fix_json('products.json')
