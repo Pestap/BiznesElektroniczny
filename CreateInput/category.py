@@ -21,3 +21,10 @@ class Category:
                 children_node = new_category
 
             children_node.add_subcat(cat_string[1:])
+
+    def r_print(self, level=0):
+        for i in range(level):
+            print("--", end="")
+        print(self.name)
+        for cat in self.subcategories:
+            cat.r_print(level+1)
