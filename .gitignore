@@ -153,6 +153,7 @@ modules/*
 override/*
 themes/*/
 themes/classic
+!themes/child_theme
 !themes/_core
 !themes/_libraries
 
