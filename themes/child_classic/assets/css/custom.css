@@ -6,6 +6,11 @@
 
 body, .top-menu a {
     color: #0b447c !important;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#wrapper {
+    color: white;
 }
 
 .subcategories h5, h2 {
