@@ -2,3 +2,16 @@
  * Custom code goes here.
  * A template should always ship with an empty custom.css
  */
+
+
+body {
+    color: #0b447c !important;
+}
+
+.subcategories h5, h2 {
+    color: #0b447c !important;
+}
+
+a.subcategory-name:hover {
+    color: #1364b6 !important;
+}
