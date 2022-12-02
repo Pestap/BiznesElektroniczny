@@ -4,7 +4,7 @@
  */
 
 
-body {
+body, .top-menu a {
     color: #0b447c !important;
 }
 
