@@ -16,6 +16,6 @@ a.subcategory-name {
     color: #0b447c !important;
 }
 
-a.subcategory-name:hover {
+a.subcategory-name:hover, .top-menu a:hover{
     color: #2f84da !important;
 }
