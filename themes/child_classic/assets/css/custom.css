@@ -12,6 +12,10 @@ body {
     color: #0b447c !important;
 }
 
+a.subcategory-name {
+    color: #0b447c !important;
+}
+
 a.subcategory-name:hover {
     color: #1364b6 !important;
 }
