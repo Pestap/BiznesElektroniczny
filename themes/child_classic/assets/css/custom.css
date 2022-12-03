@@ -34,14 +34,13 @@ a:hover {
     border: 1px solid #2f84da !important;
     border-radius: 5px !important;
 }
+
 input.form-control {
     background-color: white !important;
     color: #0b447c !important;
     border: 1px solid #0b447c !important;
 }
-input.form-control:focus {
-    border: 4px solid #0b447c !important;
-}
+
 /* Header */
 
 div.header-top, .header-top .sub-menu {
