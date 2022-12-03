@@ -143,12 +143,20 @@ a.subcategory-name:hover{
     color: #840000;
 }
 
+.product-prices .current-price-value {
+    color: #0b447c;
+}
+
 .product-prices .has-discount .discount {
     background-color: #840000;
 }
 
 .blockreassurance_product .item-product {
     color: #840000;
+}
+
+.product-container .tabs .nav-link.active {
+    border-bottom: #0b447c 3px solid;
 }
 
 /* shadow boxes */
@@ -169,5 +177,13 @@ div.block-categories {
 }
 
 #wrapper {
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+
+.product-container .tabs {
+    box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+
+#product-comments-list {
     box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 }
