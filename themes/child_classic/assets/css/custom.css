@@ -194,11 +194,11 @@ a.subcategory-name:hover{
     border-radius: 5px !important;
 }
 
-.product-prices .has-discount .current-price-value, .has-discount .current-price-value span.price {
+.product-prices .has-discount .current-price-value, .has-discount .current-price span.price {
     color: #840000 !important;
 }
 
-.product-prices .current-price-value, .current-price-value span.price {
+.product-prices .current-price-value, .current-price span.price {
     color: #0b447c !important;
 }
 
