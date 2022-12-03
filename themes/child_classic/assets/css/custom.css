@@ -53,6 +53,10 @@ div.header-top, .header-top .sub-menu {
     background-color: #0b447c !important;
 }
 
+.ui-menu-item {
+    background-color: #0b447c !important;
+}
+
 /* Category and product list css */
 .subcategories h5, h2 {
     color: #0b447c !important;
