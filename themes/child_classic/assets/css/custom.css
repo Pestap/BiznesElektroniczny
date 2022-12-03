@@ -30,6 +30,10 @@ a:hover {
     background-color: #2f84da !important;
 }
 
+.focus {
+    border: 1px solid #0b447c !important;
+}
+
 .form-footer .btn {
     background-color: #0b447c !important;
     border: 1px solid #0b447c !important;
