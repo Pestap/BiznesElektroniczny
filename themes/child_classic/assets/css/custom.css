@@ -23,8 +23,8 @@ a:hover {
 
 /* Header */
 
-.header-top {
-    background-color: #0b447c;
+div.header-top {
+    background-color: #0b447c !important;
 }
 
 .header-top a{
