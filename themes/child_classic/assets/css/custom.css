@@ -32,7 +32,7 @@ div.header-top, .header-top .sub-menu {
 }
 
 .header-top a:hover {
-    color: #c8dbee !important;
+    color: #e4eaf0 !important;
 }
 
 .header-nav {
@@ -56,6 +56,7 @@ div.header-top, .header-top .sub-menu {
 .ui-menu-item {
     background-color: #0b447c !important;
 }
+
 .ui-menu-item a {
     font-family: 'Ubuntu', sans-serif;
     color: white !important;
@@ -63,6 +64,14 @@ div.header-top, .header-top .sub-menu {
 
 .ui-menu-item a:hover {
     background-color: #2f84da !important;
+}
+
+.material-icons.shopping-cart {
+    color: #0b447c !important;
+}
+
+.header span {
+    color: #0b447c !important;
 }
 
 /* Category and product list css */
