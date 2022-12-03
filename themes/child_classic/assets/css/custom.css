@@ -24,11 +24,22 @@ a:hover {
 
 .btn {
     background-color: #0b447c !important;
-    color: white;
+    color: white !important;
+}
+
+a.btn {
+    background-color: #0b447c !important;
+    color: white !important;
+}
+
+a.btn:hover {
+    background-color: #2f84da !important;
+    color: white !important;
 }
 
 .btn:hover {
     background-color: #2f84da !important;
+    color: white !important;
 }
 
 .focus {
