@@ -55,6 +55,12 @@ div.header-top, .header-top .sub-menu {
 
 .ui-menu-item {
     background-color: #0b447c !important;
+    font-family: 'Ubuntu', sans-serif;
+    color: white !important;
+}
+
+.ui-menu-item:hover {
+    background-color: green !important;
 }
 
 /* Category and product list css */
