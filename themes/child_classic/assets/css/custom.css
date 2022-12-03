@@ -172,7 +172,7 @@ a.subcategory-name:hover{
     border-bottom: #0b447c 3px solid;
 }
 
-.product-container .tabs .nav-item:hover {
+.product-container .tabs .nav-link:hover {
     border-bottom: #0b447c 3px solid !important;
 }
 
