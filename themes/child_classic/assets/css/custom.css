@@ -23,7 +23,7 @@ a:hover {
 
 /* Header */
 
-div.header-top {
+div.header-top, .header-top .sub-menu {
     background-color: #0b447c !important;
 }
 
@@ -32,11 +32,25 @@ div.header-top {
 }
 
 .header-top a:hover {
-    color: #99bbdd;
+    color: #c8dbee;
 }
 
 .header-nav {
     border: none;
+}
+
+.material-icons.search {
+    color: white !important;
+}
+
+#search_widget form input {
+    background-color: #0b447c;
+    border: 2px solid white;
+    color: white;
+}
+
+.ui-menu {
+    background-color: #0b447c !important;
 }
 
 /* Category and product list css */
