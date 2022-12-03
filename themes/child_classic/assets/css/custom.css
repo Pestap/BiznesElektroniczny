@@ -9,8 +9,12 @@ body, .top-menu a {
     font-family: 'Ubuntu', sans-serif;
 }
 
-.h1, .h2, .h3, .h4, body, p {
+.h1, .h2, .h3, .h4, body, p, a {
     color: #0b447c !important;
+}
+
+a:hover {
+    color: #2f84da !important;
 }
 
 #wrapper {
