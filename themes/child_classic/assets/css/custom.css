@@ -125,7 +125,7 @@ li.ui-menu-item a:hover {
     color: white !important;
 }
 
-.active .header {
+.blockcart.cart-preview.active {
     background-color: #840000 !important;
 }
 
