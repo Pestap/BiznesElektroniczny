@@ -55,11 +55,13 @@ div.header-top, .header-top .sub-menu {
 
 .ui-menu-item {
     background-color: #0b447c !important;
+}
+.ui-menu-item a {
     font-family: 'Ubuntu', sans-serif;
     color: white !important;
 }
 
-.ui-menu-item:hover {
+.ui-menu-item a:hover {
     background-color: green !important;
 }
 
