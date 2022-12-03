@@ -117,6 +117,18 @@ li.ui-menu-item a:hover {
     color: #0b447c !important;
 }
 
+.active .material-icons.shopping-cart {
+    color: white !important;
+}
+
+.active .header span {
+    color: white !important;
+}
+
+.active .header {
+    background-color: #840000 !important;
+}
+
 .col-md-2.header_logo {
     margin-top: 10px;
 }
