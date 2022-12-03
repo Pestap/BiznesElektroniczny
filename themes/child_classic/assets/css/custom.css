@@ -21,6 +21,24 @@ a:hover {
     color: white;
 }
 
+/* Header */
+
+.header-top {
+    background-color: #0b447c;
+}
+
+.header-top a{
+    color: white !important;
+}
+
+.header-top a:hover {
+    color: #99bbdd;
+}
+
+.header-nav {
+    border: none;
+}
+
 /* Category and product list css */
 .subcategories h5, h2 {
     color: #0b447c !important;
