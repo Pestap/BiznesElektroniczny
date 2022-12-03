@@ -33,7 +33,7 @@
     <div class="container">
       <div class="row">
         <div class="hidden-sm-down">
-            <div class="col-md-2" id="_desktop_logo">
+            <div class="col-md-2 header_logo" id="_desktop_logo">
             {if $shop.logo_details}
               {if $page.page_name == 'index'}
                 <h1>

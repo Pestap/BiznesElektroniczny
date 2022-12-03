@@ -75,6 +75,10 @@ li.ui-menu-item a:hover {
     color: #0b447c !important;
 }
 
+.col-md-2.header_logo {
+    margin-top: 10px;
+}
+
 /* Footer */
 
 #footer form .btn {
