@@ -24,6 +24,7 @@ a:hover {
 
 .btn {
     background-color: #0b447c !important;
+    color: white;
 }
 
 .btn:hover {
