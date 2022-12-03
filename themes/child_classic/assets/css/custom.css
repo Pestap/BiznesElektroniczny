@@ -119,6 +119,10 @@ a.subcategory-name:hover{
     background-color: #0b447c !important;
 }
 
+.sort-by-row .dropdown-menu a:hover{
+    background: white !important;
+}
+
 /* Product page */
 .product-images .js-thumb-selected {
     border: #0b447c 3px solid;
