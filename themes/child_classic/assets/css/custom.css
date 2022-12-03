@@ -27,12 +27,12 @@ div.header-top, .header-top .sub-menu {
     background-color: #0b447c !important;
 }
 
-.header-top a{
+.header-top a {
     color: white !important;
 }
 
 .header-top a:hover {
-    color: #e4eaf0 !important;
+    color: #c7e1fc !important;
 }
 
 .header-nav {
@@ -83,7 +83,7 @@ a.subcategory-name {
     color: #0b447c !important;
 }
 
-a.subcategory-name:hover, .top-menu a:hover{
+a.subcategory-name:hover{
     color: #2f84da !important;
 }
 
