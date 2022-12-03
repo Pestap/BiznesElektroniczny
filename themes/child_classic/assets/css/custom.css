@@ -123,17 +123,17 @@ a.subcategory-name:hover{
     border: #0b447c 3px solid;
 }
 
-.product-actions .btn{
+.product-actions .add .btn{
     background-color: #0b447c !important;
     border: 1px solid #0b447c !important;
     border-radius: 5px !important;
 }
 
 .product-actions .material-icons.shopping-cart {
-    color: white;
+    color: white !important;
 }
 
-.product-actions .btn:hover {
+.product-actions .add .btn:hover {
     background-color: #2f84da !important;
     border: 1px solid #2f84da !important;
     border-radius: 5px !important;
