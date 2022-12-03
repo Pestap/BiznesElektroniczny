@@ -22,6 +22,13 @@ a:hover {
     background-color: white !important;
 }
 
+.btn {
+    background-color: #0b447c !important;
+}
+
+.btn:hover {
+    background-color: #2f84da !important;
+}
 
 .form-footer .btn {
     background-color: #0b447c !important;
