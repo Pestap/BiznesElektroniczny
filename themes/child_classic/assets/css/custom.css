@@ -194,16 +194,16 @@ a.subcategory-name:hover{
     border-radius: 5px !important;
 }
 
-.product-prices .has-discount .current-price-value, .current-price-value {
-    color: #840000;
+.product-prices .has-discount .current-price-value, .has-discount .current-price-value {
+    color: #840000 !important;
 }
 
 .product-prices .current-price-value, .current-price-value {
-    color: #0b447c;
+    color: #0b447c !important;
 }
 
-.product-prices .has-discount .discount, .discount{
-    background-color: #840000;
+.product-prices .has-discount .discount, .has-discount .discount{
+    background-color: #840000 !important;
 }
 
 .blockreassurance_product .item-product {
