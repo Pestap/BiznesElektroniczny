@@ -31,11 +31,11 @@ a.subcategory-name:hover, .top-menu a:hover{
 }
 
 .product-flag.discount {
-    background-color: #840000;
+    background-color: #840000 !important;
 }
 
 .product-flag.new {
-    background-color: #0b447c;
+    background-color: #0b447c !important;
 }
 
 /* shadow boxes */
