@@ -9,6 +9,10 @@ body, .top-menu a {
     font-family: 'Ubuntu', sans-serif;
 }
 
+.h1, .h2, .h3, .h4, body, p {
+    color: #0b447c !important;
+}
+
 #wrapper {
     color: white;
 }
