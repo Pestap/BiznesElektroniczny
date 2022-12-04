@@ -94,6 +94,10 @@ input.form-control {
     color: #0b447c !important;
 }
 
+.modal-body span.discount {
+    color: white !important;
+}
+
 .modal-body .h6.product-name {
     color: #0b447c !important;
 }
