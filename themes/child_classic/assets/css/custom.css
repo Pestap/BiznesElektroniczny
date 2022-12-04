@@ -90,6 +90,10 @@ input.form-control {
     outline: 0 !important;
 }
 
+.modal-body span {
+    color: #0b447c !important;
+}
+
 .modal-body .h6.product-name {
     color: #0b447c !important;
 }
