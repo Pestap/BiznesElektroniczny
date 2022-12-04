@@ -54,6 +54,7 @@ textarea, select {
     outline: 0 !important;
     background-color: white !important;
     border: 1px solid #0b447c !important;
+    color: #0b447c !important;
 }
 
 label {
@@ -76,6 +77,10 @@ input.form-control {
     background-color: white !important;
     color: #0b447c !important;
     border: 1px solid #0b447c !important;
+}
+
+.contact-rich .material-icons {
+    color: #840000 !important;
 }
 
 /* Header */
