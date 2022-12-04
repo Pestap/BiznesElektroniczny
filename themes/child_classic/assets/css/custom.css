@@ -196,6 +196,10 @@ li.ui-menu-item a:hover {
     background-color: #0b447c !important;
 }
 
+.js-top-menu-bottom #_mobile_contact_link #contact-link {
+    font-weight: 600;
+}
+
 @media only screen and (min-width: 768px) {
     .col-md-2.header_logo {
         margin-top: 12px;
