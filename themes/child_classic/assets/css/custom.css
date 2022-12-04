@@ -154,9 +154,15 @@ li.ui-menu-item a:hover {
 #footer form .input-wrapper input {
     color: #0b447c !important;
 }
-#footer form .input-wrapper input:focus {
+
+#footer form .input-wrapper input {
     border: 1px solid #0b447c !important;
 }
+
+#footer form .input-wrapper input:focus {
+    border: 2px solid #0b447c !important;
+}
+
 /* Category and product list css */
 .subcategories h5, h2 {
     color: #0b447c !important;
