@@ -192,6 +192,12 @@ li.ui-menu-item a:hover {
     margin-top: 10px;
 }
 
+@media only screen and (min-width: 768px) {
+    .col-md-2.header_logo {
+        margin-top: 12px;
+    }
+}
+
 @media only screen and (min-width: 992px) {
     .col-md-2.header_logo {
         margin-top: 12px;
