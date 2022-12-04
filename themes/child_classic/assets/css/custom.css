@@ -43,8 +43,13 @@ a.btn:hover {
 }
 
 .focus {
-    border: 1px solid #0b447c !important;
+    outline: 0 !important;
 }
+
+input {
+    outline: 0 !important;
+}
+
 
 .form-footer .btn {
     background-color: #0b447c !important;
