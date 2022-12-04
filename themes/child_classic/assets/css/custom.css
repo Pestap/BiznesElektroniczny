@@ -89,6 +89,21 @@ input.form-control {
     border: 1px solid #840000 !important;
     outline: 0 !important;
 }
+
+.modal-body .h6.product-name {
+    color: #0b447c !important;
+}
+
+.modal-body .cart-content .label {
+    color: #0b447c !important;
+}
+
+.modal-body .cart-content .product-total .label, .modal-body .cart-content .product-total .value{
+    color: black !important;
+}
+
+
+
 /* Kontakt*/
 
 .contact-rich .material-icons {
