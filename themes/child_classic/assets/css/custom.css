@@ -192,6 +192,10 @@ li.ui-menu-item a:hover {
     margin-top: 10px;
 }
 
+#mobile_top_menu_wrapper {
+    background-color: #0b447c !important;
+}
+
 @media only screen and (min-width: 768px) {
     .col-md-2.header_logo {
         margin-top: 12px;
