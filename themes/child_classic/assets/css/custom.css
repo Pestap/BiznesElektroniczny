@@ -50,6 +50,15 @@ input {
     outline: 0 !important;
 }
 
+textarea, select {
+    outline: 0 !important;
+    background-color: white !important;
+    border: 1px solid #0b447c !important;
+}
+
+label {
+    color: #0b447c !important;
+}
 
 .form-footer .btn {
     background-color: #0b447c !important;
