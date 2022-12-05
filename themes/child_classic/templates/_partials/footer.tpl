@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col-md-12">
         <p class="text-sm-center">
-        Strona przygotowana na projekt z przedmiotu Biznes elektroniczny
+        Strona została przygotowana na projekt z przedmiotu Biznes elektroniczny na bazie PrestaShop
         </p>
       </div>
     </div>
