@@ -55,7 +55,7 @@ def fix_json(filename):
 
     for el in result:
         name_array = el['img_src'].split('.')
-        new_name = "http://192.168.0.102/img/p/" + name_array[0] + '.png'
+        new_name = "http://localhost/img/p/" + name_array[0] + '.png'
         el['img_src'] = new_name
 
     file_url = "../Results/" + filename
