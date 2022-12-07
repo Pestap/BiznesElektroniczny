@@ -36,6 +36,7 @@ npm-debug.log.*
 
 # Images
 /img/*
+!/img/p
 !/img/.htaccess
 !/img/index.php
 !/img/404.gif
