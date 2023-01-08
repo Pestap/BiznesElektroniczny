@@ -1,0 +1,25 @@
+<?php return array (
+  'parameters' => 
+  array (
+    'database_host' => 'localhost',
+    'database_port' => '',
+    'database_name' => 'prestashop',
+    'database_user' => 'root',
+    'database_password' => 'Asseco#123',
+    'database_prefix' => 'ps_',
+    'database_engine' => 'InnoDB',
+    'mailer_transport' => 'smtp',
+    'mailer_host' => '127.0.0.1',
+    'mailer_user' => NULL,
+    'mailer_password' => NULL,
+    'secret' => 'TW4ww8SIIWQ8rYM6rht9YeWF9H44Lz4ALiayYk83rJumhDJKWBsFGPusGQUhJ4Ic',
+    'ps_caching' => 'CacheMemcache',
+    'ps_cache_enable' => false,
+    'ps_creation_date' => '2022-11-24',
+    'locale' => 'pl-PL',
+    'use_debug_toolbar' => true,
+    'cookie_key' => 'nj1z1Mt9cdvhPdU7DPWEgKB9vvug9cBzgS4Pb6ZHp8BWYBJEGAOPAffE8kFa4Nmc',
+    'cookie_iv' => 'uNeq0LQf9NaF19M1UanL2Irxk7Efhn9n',
+    'new_cookie_key' => 'def00000538d8bf70d8bb5ee6f0cf884f2100ccc034d5551366f2794a033d422a641f1859bb2440845583e227bb5ee4d13222a032058f42205512506097e8d8b5e3abbaf',
+  ),
+);
