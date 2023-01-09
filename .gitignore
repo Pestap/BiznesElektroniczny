@@ -29,6 +29,8 @@ npm-debug.log.*
 !/cache/smarty/index.php
 !/cache/tcpdf/index.php
 
+var/cache
+
 # Download
 /download/*
 !/download/.htaccess
