@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+  db:
+    build: Maria
+    container_name: MariaDB
+    restart: on-failure
+    environment:
+      - MYSQL_ROOT_PASSWORD=Asseco#123
+      - MYSQL_DATABASE=prestashop
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpMyAdmin
+    restart: on-failure
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+
+  prestashop:
+    build: Presta
+    container_name: Prestashop
+    restart: on-failure
+    depends_on:
+    - db
+    ports:
+    - 80:80
+    - 443:443
+    environment:
+      - PS_DEV_MODE=1
+      - DB_SERVER=MariaDB
+      - DB_USER=root
+      - DB_PASSWD=Asseco#123
+      - DB_NAME=prestashop
+      - PS_INSTALL_AUTO=0
+      - PS_FOLDER_ADMIN=admin-dev
+      - PS_FOLDER_INSTALL=install_dir
+
+networks:
+  default:
+    driver: bridge

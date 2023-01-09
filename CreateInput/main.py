@@ -42,7 +42,7 @@ def create_products_csv(filename):
 
     f = open("../Results/products.csv", 'w', encoding='utf-8', newline="")
     writer = csv.writer(f, delimiter=';')
-    writer.writerow(["Nazwa", 'Cena z podatkiem', 'Kategoria', 'Ilość', 'URL zdjecia'])
+    writer.writerow(["Nazwa", 'Cena z podatkiem', 'Kategoria', 'Ilość', 'URL zdjecia', 'Opis'])
     for product in result:
         row = [product['name'], product['price'], product['categories'][-1], 30, product['img_src'], product['description']]
         writer.writerow(row)
@@ -73,6 +73,24 @@ def rename_images(url):
 
 
 #fix_json('products.json')
-create_categories_csv('products.json')
-create_products_csv('products.json')
-rename_images("../Results/Images")
+#create_categories_csv('products.json')
+#create_products_csv('products.json')
+#rename_images("../Results/Images")
+
+def append_csv():
+    rows = []
+    with open('../Results/products.csv','r', encoding='utf-8') as f:
+        csv_reader = csv.reader(f, delimiter=';')
+        for row in csv_reader:
+            row.append(4)
+            rows.append(row)
+
+    with open('../Results/products_2.csv', 'w', encoding='utf-8', newline="") as f:
+        writer = csv.writer(f, delimiter=';')
+        for row in rows:
+            writer.writerow(row)
+
+
+
+
+append_csv()

@@ -34,7 +34,7 @@ class Product:
         options.add_argument(f'user-agent={user}')
 
         driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=options)
-        driver.get(self.img_src)
+        driver.get(self.img_src) # 180x180 zamienic na 350x350
         driver.refresh()
         driver.implicitly_wait(1)
 
