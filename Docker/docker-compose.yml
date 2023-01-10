@@ -27,16 +27,6 @@ services:
     ports:
     - 80:80
     - 443:443
-    environment:
-      - PS_DEV_MODE=1
-      - DB_SERVER=MariaDB
-      - DB_USER=root
-      - DB_PASSWD=Asseco#123
-      - DB_NAME=prestashop
-      - PS_INSTALL_AUTO=0
-      - PS_FOLDER_ADMIN=admin-dev
-      - PS_FOLDER_INSTALL=install_dir
-
 networks:
   default:
     driver: bridge
