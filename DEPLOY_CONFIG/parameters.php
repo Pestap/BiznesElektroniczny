@@ -1,9 +1,9 @@
 <?php return array (
   'parameters' =>
   array (
-    'database_host' => 'MariaDB',
+    'database_host' => 'harzypotterzy_mariadb',
     'database_port' => '',
-    'database_name' => 'prestashop',
+    'database_name' => 'harzypotterzy_db',
     'database_user' => 'root',
     'database_password' => 'Asseco#123',
     'database_prefix' => 'ps_',
