@@ -1,32 +1,32 @@
-version: '2'
+version: '3'
 
 services:
-  db:
-    build: Maria
-    container_name: MariaDB
-    restart: on-failure
-    environment:
-      - MYSQL_ROOT_PASSWORD=Asseco#123
-      - MYSQL_DATABASE=prestashop
+    harzypotterzy_mariadb:
+      image: mariadb:10.11-rc
+      container_name: harzypotterzy_mariadb
+      environment:
+        - MYSQL_ROOT_PASSWORD=Asseco#123
+      restart: on-failure
 
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: phpMyAdmin
-    restart: on-failure
-    depends_on:
-      - db
-    ports:
-      - 8080:80
 
-  prestashop:
-    build: Presta
-    container_name: Prestashop
-    restart: on-failure
-    depends_on:
-    - db
-    ports:
-    - 80:80
-    - 443:443
+    harzypotterzy_phpmyadmin:
+      image: phpmyadmin
+      container_name: phpMyAdmin
+      restart: on-failure
+      depends_on:
+        - harzypotterzy_mariadb
+      ports:
+        - 8080:80
+
+    harzypotterzy_presta:
+      build: Presta
+      container_name: HarzyPotterzy_presta
+      restart: on-failure
+      depends_on:
+      - harzypotterzy_mariadb
+      ports:
+      - 80:80
+      - 443:443
 networks:
   default:
     driver: bridge
