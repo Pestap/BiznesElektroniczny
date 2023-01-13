@@ -5,28 +5,30 @@ services:
       image: mariadb:10.11-rc
       container_name: harzypotterzy_mariadb
       environment:
-        - MYSQL_ROOT_PASSWORD=Asseco#123
+        - MYSQL_ROOT_PASSWORD=root
       restart: on-failure
-
-
-    harzypotterzy_phpmyadmin:
-      image: phpmyadmin
-      container_name: phpMyAdmin
-      restart: on-failure
-      depends_on:
-        - harzypotterzy_mariadb
-      ports:
-        - 8080:80
 
     harzypotterzy_presta:
-      build: Presta
-      container_name: HarzyPotterzy_presta
+      image: pestap/be_harzypotterzy
+      container_name: harzypotterzy_presta
       restart: on-failure
+      environment:
+        PS_INSTALL_AUTO: 0
+        PS_ERASE_DB: 0
+        DB_SERVER: harzypotterzy_mariadb
+        DB_USER: harzypotterzy
+        DB_PASSWD: harzypotterzy
+        DB_NAME: harzypotterzy_db
+        PS_DEV_MODE: 0
+        PS_DOMAIN: localhost:17257
+        PS_DOMAIN_SSL: localhost:17258
+        PS_ENABLE_SSL: 1
+        PS_LANGUAGE: pl
+        PS_COUNTRY: PL
+        ADMIN_MAIL: pestap4k@gmail.com
+        ADMIN_PASSWD: Asseco#123
       depends_on:
       - harzypotterzy_mariadb
       ports:
-      - 80:80
-      - 443:443
-networks:
-  default:
-    driver: bridge
+      - 17257:80
+      - 17258:443
