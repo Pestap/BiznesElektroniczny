@@ -1,8 +1,8 @@
 <?php return array (
   'parameters' =>
   array (
-    'database_host' => 'harzypotterzy_mariadb',
-    'database_port' => '',
+    'database_host' => 'localhost',
+    'database_port' => '17259',
     'database_name' => 'harzypotterzy_db',
     'database_user' => 'harzypotterzy',
     'database_password' => 'harzypotterzy',
