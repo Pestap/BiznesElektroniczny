@@ -1,11 +1,11 @@
 <?php return array (
   'parameters' =>
   array (
-    'database_host' => 'localhost',
+    'database_host' => 'actina15.maas',
     'database_port' => '17259',
     'database_name' => 'harzypotterzy_db',
-    'database_user' => 'harzypotterzy',
-    'database_password' => 'harzypotterzy',
+    'database_user' => 'root',
+    'database_password' => 'root',
     'database_prefix' => 'ps_',
     'database_engine' => 'InnoDB',
     'mailer_transport' => 'smtp',
