@@ -20,8 +20,8 @@ services:
         DB_PASSWD: harzypotterzy
         DB_NAME: harzypotterzy_db
         PS_DEV_MODE: 0
-        PS_DOMAIN: localhost:17257
-        PS_DOMAIN_SSL: localhost:17258
+        PS_DOMAIN: localhost:80
+        PS_DOMAIN_SSL: localhost:443
         PS_ENABLE_SSL: 1
         PS_LANGUAGE: pl
         PS_COUNTRY: PL
@@ -30,5 +30,5 @@ services:
       depends_on:
       - harzypotterzy_mariadb
       ports:
-      - 17257:80
-      - 17258:443
+      - 80:80
+      - 443:443

@@ -24,7 +24,7 @@ driver = webdriver.Chrome(options=options)#, service=ChromiumService(ChromeDrive
 
 #driver = webdriver.Chrome(options=chromeOptions)
 
-driver.get("http://127.0.0.1")
+driver.get("https://localhost")
 
 #ostrzeżenie przed certyfiaktem
 driver.find_element(By.ID, "details-button").click()
