@@ -2,16 +2,20 @@ version: '3'
 
 services:
     harzypotterzy_mariadb:
-      image: mariadb:10.11-rc
+      image: mariadb:10
       container_name: harzypotterzy_mariadb
       environment:
-        - MYSQL_ROOT_PASSWORD=root
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: harzypotterzy_db
+        DB_USER: harzypotterzy
+        DB_PASSWORD: harzypotterzy
+        
       restart: on-failure
       ports:
       - 17259:3306
 
     harzypotterzy_presta:
-      image: pestap/be_harzypotterzy
+      build: ../Presta
       container_name: harzypotterzy_presta
       restart: on-failure
       environment:

@@ -57,7 +57,7 @@ for i in range(10):
 	add_btn.click()
 
 	time.sleep(1)
-	driver.get("http://127.0.0.1")
+	driver.get("https://localhost")
 	continue
 
 time.sleep(2)
@@ -75,7 +75,7 @@ time.sleep(2)
 cart_counter = driver.find_element(By.CLASS_NAME,"cart-products-count")
 print("Items:", cart_counter.text)
 
-driver.get("http://localhost/index.php?controller=order")
+driver.get("https://localhost/index.php?controller=order")
 
 # Mr
 mr = driver.find_element(By.ID, "field-id_gender-1")
@@ -158,7 +158,7 @@ div = driver.find_element(By.ID, "payment-confirmation")
 order_btn = div.find_element(By.TAG_NAME, "button")
 order_btn.click()
 
-driver.get("http://localhost/index.php?controller=history")
+driver.get("https://localhost/index.php?controller=history")
 rows = driver.find_elements(By.CSS_SELECTOR, "tr")
 print("Orders:")
 for row in rows:

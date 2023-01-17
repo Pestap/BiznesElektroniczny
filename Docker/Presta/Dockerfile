@@ -13,8 +13,12 @@ COPY --from=base_layer /BiznesElektroniczny .
 
 
 
-RUN mv DEPLOY_CONFIG/a2config.conf /etc/apache2/sites-enabled/000-default.conf
-RUN mv DEPLOY_CONFIG/parameters.php ./app/config/parameters.php
+#RUN mv DEPLOY_CONFIG/a2config.conf /etc/apache2/sites-enabled/000-default.conf
+#RUN mv DEPLOY_CONFIG/parameters.php ./app/config/parameters.php
+
+COPY a2config.conf /etc/apache2/sites-enabled/000-default.conf
+COPY parameters.php ./app/config/parameters.php
+
 
 RUN rm -rf DEPLOY_CONFIG
 
