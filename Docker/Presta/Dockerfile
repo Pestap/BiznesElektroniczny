@@ -13,12 +13,18 @@ COPY --from=base_layer /BiznesElektroniczny .
 
 
 
-#RUN mv DEPLOY_CONFIG/a2config.conf /etc/apache2/sites-enabled/000-default.conf
-#RUN mv DEPLOY_CONFIG/parameters.php ./app/config/parameters.php
+RUN mv DEPLOY_CONFIG/a2config.conf /etc/apache2/sites-enabled/000-default.conf
+RUN mv DEPLOY_CONFIG/parameters.php ./app/config/parameters.php
 
-COPY a2config.conf /etc/apache2/sites-enabled/000-default.conf
-COPY parameters.php ./app/config/parameters.php
+#COPY a2config.conf /etc/apache2/sites-enabled/000-default.conf
+#COPY parameters.php ./app/config/parameters.php
 
+RUN apt update -y
+RUN apt install -y memcached
+
+RUN apt install -y libz-dev libmemcached-dev
+RUN pecl install memcached
+RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
 
 RUN rm -rf DEPLOY_CONFIG
 
